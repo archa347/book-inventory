@@ -6,6 +6,23 @@
 - Use a real DB instead of an in-memory store
 
 ## Development
+### Code
+
+This is a Typescript/NodeJS project.  It uses `fastify` to provide the HTTP API.
+
+The `fastify` server is configured in [`src/server.ts`](src/server.ts).
+
+The domain level service is configured in [`src/app.ts`](src/app.ts)
+
+The [`src/domain/contracts`](src/domain/contracts) folder contains the interfaces for the
+primary units of functionality and their supporting types.
+
+All service interfaces are currently being implemented by a single class that wraps the 
+in-memory data store [src/domain/services/memory-inventory-service.ts](src/domain/services/memory-inventory-service.ts).  
+This was less than ideal but could pretty easily be broken down into separate implementations with a fairly painless refactor.
+
+Testing is being provided by `tap`, a lightweight and straightforward test runner.
+
 ### Running Locally
 This project has been set up to run with Docker such that the user needs a minimum of
 dependencies on their local machine to get started
