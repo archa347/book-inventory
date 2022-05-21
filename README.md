@@ -21,7 +21,10 @@ All service interfaces are currently being implemented by a single class that wr
 in-memory data store [src/domain/services/memory-inventory-service.ts](src/domain/services/memory-inventory-service.ts).  
 This was less than ideal but could pretty easily be broken down into separate implementations with a fairly painless refactor.
 
-Testing is being provided by `tap`, a lightweight and straightforward test runner.
+Testing is being provided by `tap`, a lightweight and straightforward test runner.  Tests are in the [`test`](test) directory.
+For the sake of efficiency I focused on functional API tests, as the HTTP layer is just a lightweight wrapper around the domain
+code anyways and most of the logic was simple enough that more granular unit tests didn't seem worth the time.  The major test
+cases were easy enough to exercise via the API, so I was able to achieve roughly 95% test coverage.
 
 ### Running Locally
 This project has been set up to run with Docker such that the user needs a minimum of
