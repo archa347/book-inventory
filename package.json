@@ -1,0 +1,37 @@
+{
+  "name": "book-inventory",
+  "version": "1.0.0",
+  "description": "Microservice for managing book inventory",
+  "scripts": {
+    "test": "tap --files=dist/test",
+    "test-watch": "concurrently npm:build-watch 'tap --files=dist/test --watch -Rspec'",
+    "build": "tsc",
+    "start": "node ./bin/server",
+    "build-watch": "tsc --watch",
+    "server-watch": "nodemon --inspect ./bin/server --watch ./dist",
+    "start-dev": "concurrently npm:build-watch npm:server-watch",
+    "docker-dev-build": "docker build . --target=dev -t book-inventory-dev",
+    "docker-dev-run": "docker run -v `pwd`/src:/app/src -p 3000:8080 -it book-inventory-dev:latest",
+    "docker-dev": "npm run docker-dev-build && npm run docker-dev-run",
+    "docker-run-test-watch": "docker run -v `pwd`/src:/app/src -v `pwd`/test:/app/test -p 3000:8080 -it book-inventory-dev:latest npm run test-watch",
+    "docker-test-watch": "npm run docker-dev-build && npm run docker-run-test-watch",
+    "docker-run-test": "docker run -v `pwd`/src:/app/src -v `pwd`/test:/app/test -p 3000:8080 -it book-inventory-dev:latest npm run test",
+    "docker-test": "npm run docker-dev-build && npm run docker-run-test"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.29.0",
+    "supertest": "^6.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.35",
+    "@types/supertest": "^2.0.12",
+    "@types/tap": "^15.0.7",
+    "concurrently": "^7.2.0",
+    "json-schema-to-typescript": "^10.1.5",
+    "nodemon": "^2.0.16",
+    "tap": "^16.2.0",
+    "typescript": "^4.6.4"
+  }
+}
